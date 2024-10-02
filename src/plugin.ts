@@ -393,7 +393,7 @@ export const oas3Plugin = fastifyPlugin<OAS3PluginOptions>(
           pLog.info("Enabling Scalar UI.");
           const scalar = (await import("@scalar/fastify-api-reference"))
             .default;
-          await fastify.register(scalar, {
+          await fastify.register(scalar as unknown as never, {
             routePrefix: uiPath,
             configuration: {
               ...(publish.scalarExtraOptions ?? {}),
@@ -406,5 +406,5 @@ export const oas3Plugin = fastifyPlugin<OAS3PluginOptions>(
       }
     }
   },
-  "4.x"
+  "5.x"
 );

@@ -6,6 +6,7 @@ import Fastify, {
   type FastifyServerOptions,
 } from "fastify";
 import jsYaml from "js-yaml";
+import pino from "pino";
 
 import { APPLICATION_JSON } from "../src/constants.js";
 import { oas3PluginAjv, schemaType } from "../src/index.js";
@@ -13,6 +14,7 @@ import { oas3Plugin, type OAS3PluginOptions } from "../src/plugin.js";
 
 const fastifyOpts: FastifyServerOptions = {
   logger: { level: "error" },
+  // loggerInstance: pino({ level: "error" }),
   ajv: {
     customOptions: {
       coerceTypes: true,
@@ -41,7 +43,7 @@ type QwopModel = Static<typeof QwopModel>;
 
 describe("plugin", () => {
   test("can add a base GET route", async () => {
-    const fastify = Fastify(fastifyOpts);
+    const fastify = Fastify({ ...fastifyOpts });
     await fastify.register(oas3Plugin, { ...pluginOpts });
 
     // we do this inside a prefixed scope to smoke out prefix append errors
@@ -97,7 +99,7 @@ describe("plugin", () => {
   });
 
   test("will serve an OAS json doc and YAML doc", async () => {
-    const fastify = Fastify(fastifyOpts);
+    const fastify = Fastify({ ...fastifyOpts });
     await fastify.register(oas3Plugin, { ...pluginOpts });
 
     // we do this inside a prefixed scope to smoke out prefix append errors
@@ -137,7 +139,7 @@ describe("plugin", () => {
   });
 
   test("correctly represents responses in OAS documents", async () => {
-    const fastify = Fastify(fastifyOpts);
+    const fastify = Fastify({ ...fastifyOpts });
     await fastify.register(oas3Plugin, { ...pluginOpts });
 
     await fastify.register(
@@ -188,7 +190,7 @@ describe("plugin", () => {
   });
 
   test("correctly represents request bodies in OAS documents", async () => {
-    const fastify = Fastify(fastifyOpts);
+    const fastify = Fastify({ ...fastifyOpts });
     await fastify.register(oas3Plugin, { ...pluginOpts });
 
     await fastify.register(
@@ -236,7 +238,7 @@ describe("plugin", () => {
   });
 
   test("correctly represents query parameters in OAS documents", async () => {
-    const fastify = Fastify(fastifyOpts);
+    const fastify = Fastify({ ...fastifyOpts });
     await fastify.register(oas3Plugin, { ...pluginOpts });
 
     await fastify.register(async (fastify: FastifyInstance) => {
@@ -290,7 +292,7 @@ describe("plugin", () => {
   });
 
   test("correctly represents path parameters in OAS documents", async () => {
-    const fastify = Fastify(fastifyOpts);
+    const fastify = Fastify({ ...fastifyOpts });
     await fastify.register(oas3Plugin, { ...pluginOpts });
 
     await fastify.register(async (fastify: FastifyInstance) => {

@@ -1,5 +1,11 @@
+# just a fork for fastify 5.x, until the original author updates the package #
+
 # `@eropple/fastify-openapi3` #
 _Because I just can't stop making OpenAPI libraries, I guess._
+
+
+[![License](https://img.shields.io/github/license/eropple/fastify-openapi3)](
+
 
 [![NPM version](https://img.shields.io/npm/v/@eropple/fastify-openapi3)](https://www.npmjs.com/package/@eropple/fastify-openapi3) [![CI](https://github.com/eropple/fastify-openapi3/actions/workflows/ci.yaml/badge.svg)](https://github.com/eropple/fastify-openapi3/actions/workflows/ci.yaml)
 
